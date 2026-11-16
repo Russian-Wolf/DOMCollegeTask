@@ -24,7 +24,10 @@
   - When one player wins - line crosses the winning 3 symbols. Board is grayed out after that.
   - When nobody wins (tie) - board is simply grayed out.
 3. Additional info: last 10 games results + win/lose statistics shown (winrate % for each symbol).
-
+4. Ability to play against a bot (3 difficulties):
+  - Impossible (bot plays perfectly, you can only win by playing first & using perfect strat)
+  - Medium (some % chance bot plays suboptimally)
+  - Free (bot always plays the worst move)
 
 ## Other 
 *(Later/Possible additions)*
