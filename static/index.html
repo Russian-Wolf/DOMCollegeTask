@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A small tic-tac-toe game built with plain HTML, CSS and JavaScript.">
+  <meta name="theme-color" content="#0e9ac1">
+  <title>Tic-Tac-Toe</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1 class="page-title">Tic-Tac-Toe</h1>
+      <p class="page-subtitle">Three in a row wins. Pick a square to make your move.</p>
+    </header>
+
+    <main class="layout">
+      <section class="panel" aria-labelledby="game-title">
+        <h2 class="panel__title" id="game-title">Game</h2>
+
+        <p class="status" id="status" role="status" aria-live="polite">Ready to play</p>
+
+        <div class="board" id="board" role="group" aria-label="Tic-tac-toe board">
+          <button type="button" class="cell" data-index="0" data-preview="x" aria-label="Row 1, column 1"></button>
+          <button type="button" class="cell" data-index="1" data-preview="x" aria-label="Row 1, column 2"></button>
+          <button type="button" class="cell" data-index="2" data-preview="x" aria-label="Row 1, column 3"></button>
+          <button type="button" class="cell" data-index="3" data-preview="x" aria-label="Row 2, column 1"></button>
+          <button type="button" class="cell" data-index="4" data-preview="x" aria-label="Row 2, column 2"></button>
+          <button type="button" class="cell" data-index="5" data-preview="x" aria-label="Row 2, column 3"></button>
+          <button type="button" class="cell" data-index="6" data-preview="x" aria-label="Row 3, column 1"></button>
+          <button type="button" class="cell" data-index="7" data-preview="x" aria-label="Row 3, column 2"></button>
+          <button type="button" class="cell" data-index="8" data-preview="x" aria-label="Row 3, column 3"></button>
+          <div class="board__win-line" data-line="none" aria-hidden="true"></div>
+        </div>
+
+        <button type="button" class="button button--primary" id="restart" hidden>Play again</button>
+
+        <noscript>
+          <p class="notice">This game needs JavaScript to run.</p>
+        </noscript>
+      </section>
+
+      <aside class="sidebar" aria-label="Game settings and statistics">
+        <section class="panel" aria-labelledby="settings-title">
+          <h2 class="panel__title" id="settings-title">Settings</h2>
+
+          <form class="settings" id="settings">
+            <fieldset class="field">
+              <legend class="field__legend">Starting symbol</legend>
+              <div class="choices">
+                <label class="choice">
+                  <input class="choice__input" type="radio" name="first-player" value="random" checked>
+                  <span class="choice__text">Random</span>
+                </label>
+                <label class="choice">
+                  <input class="choice__input" type="radio" name="first-player" value="x">
+                  <span class="choice__text">X</span>
+                </label>
+                <label class="choice">
+                  <input class="choice__input" type="radio" name="first-player" value="o">
+                  <span class="choice__text">O</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset class="field">
+              <legend class="field__legend">Opponent</legend>
+              <div class="choices">
+                <label class="choice">
+                  <input class="choice__input" type="radio" name="opponent" value="human" checked>
+                  <span class="choice__text">Two players</span>
+                </label>
+                <label class="choice">
+                  <input class="choice__input" type="radio" name="opponent" value="bot">
+                  <span class="choice__text">Bot</span>
+                </label>
+              </div>
+
+              <div class="field__row">
+                <label class="field__label" for="difficulty">Bot difficulty</label>
+                <select class="select" id="difficulty" name="difficulty">
+                  <option value="free">Free (bot plays the worst move)</option>
+                  <option value="medium" selected>Medium (bot may slip up)</option>
+                  <option value="impossible">Impossible (bot plays perfectly)</option>
+                </select>
+              </div>
+
+              <p class="hint">Settings are saved in this browser.</p>
+            </fieldset>
+          </form>
+        </section>
+
+        <section class="panel" aria-labelledby="stats-title">
+          <h2 class="panel__title" id="stats-title">Statistics</h2>
+
+          <ul class="stats">
+            <li class="stats__row">
+              <span class="stats__label stats__label--x">X</span>
+              <span class="meter" aria-hidden="true">
+                <span class="meter__fill meter__fill--x" id="x-meter"></span>
+              </span>
+              <span class="stats__value" id="x-winrate">0%</span>
+            </li>
+            <li class="stats__row">
+              <span class="stats__label stats__label--o">O</span>
+              <span class="meter" aria-hidden="true">
+                <span class="meter__fill meter__fill--o" id="o-meter"></span>
+              </span>
+              <span class="stats__value" id="o-winrate">0%</span>
+            </li>
+          </ul>
+
+          <h3 class="panel__subtitle" id="history-title">Last 10 games</h3>
+          <ol class="history" id="history" aria-labelledby="history-title">
+            <li class="history__empty">No games yet.</li>
+          </ol>
+        </section>
+      </aside>
+    </main>
+
+    <footer class="page-footer">
+      <p>A student project built with plain HTML, CSS and JavaScript.</p>
+    </footer>
+  </div>
+
+  <!-- Page entry point: static/index.html loads the JS entry module src/index.js.
+       Serve the project root so ../src/index.js resolves correctly. -->
+  <script type="module" src="../src/index.js"></script>
+</body>
+</html>
