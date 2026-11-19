@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A small tic-tac-toe game built with plain HTML, CSS and JavaScript.">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#eaf6fb">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#08101d">
+  <title>Tic-Tac-Toe</title>
+  <link rel="stylesheet" href="./styles/tokens.css">
+  <link rel="stylesheet" href="./styles/base.css">
+  <link rel="stylesheet" href="./styles/layout.css">
+  <link rel="stylesheet" href="./styles/components.css">
+</head>
+<body>
+  <!-- Symbol sprite. Shapes use currentColor, so the CSS colour of the
+       cell / label / icon decides the player colour. -->
+  <svg class="sprite" id="sprite" aria-hidden="true" focusable="false">
+    <symbol id="sym-x" viewBox="0 0 100 100" data-name="X"
+      fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M24 24 L76 76 M76 24 L24 76" />
+    </symbol>
+    <symbol id="sym-o" viewBox="0 0 100 100" data-name="O"
+      fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="50" cy="50" r="32" />
+    </symbol>
+    <symbol id="sym-star" viewBox="0 0 100 100" data-name="Star"
+      fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M50 10 L60 36.2 L88 37.6 L66.2 55.3 L73.5 82.4 L50 67 L26.5 82.4 L33.8 55.3 L12 37.6 L40 36.2 Z" />
+    </symbol>
+    <symbol id="sym-heart" viewBox="0 0 100 100" data-name="Heart"
+      fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M50 82 C22 64 14 48 14 36 C14 25 22 18 32 18 C40 18 47 23 50 30 C53 23 60 18 68 18 C78 18 86 25 86 36 C86 48 78 64 50 82 Z" />
+    </symbol>
+    <symbol id="sym-bolt" viewBox="0 0 100 100" data-name="Bolt"
+      fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M58 8 L24 56 L46 56 L40 92 L78 40 L55 40 Z" />
+    </symbol>
+    <symbol id="sym-diamond" viewBox="0 0 100 100" data-name="Diamond"
+      fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M50 10 L86 50 L50 90 L14 50 Z" />
+    </symbol>
+    <symbol id="sym-moon" viewBox="0 0 100 100" data-name="Moon"
+      fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M52 10 A40 40 0 1 0 52 90 A44 44 0 0 1 52 10 Z" />
+    </symbol>
+    <symbol id="sym-triangle" viewBox="0 0 100 100" data-name="Triangle"
+      fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M50 12 L88 84 L12 84 Z" />
+    </symbol>
+  </svg>
+
+  <div class="page" id="app" data-view="game">
+    <header class="page-header">
+      <h1 class="page-title">Tic-Tac-Toe</h1>
+      <p class="page-subtitle">Three in a row wins. Pick a square to make your move.</p>
+    </header>
+
+    <main class="layout">
+      <div class="main-column">
+      <section class="panel panel--game" aria-labelledby="game-title">
+        <h2 class="panel__title" id="game-title">Game</h2>
+
+        <p class="status" id="status" role="status" aria-live="polite">Ready to play</p>
+
+        <div class="board" id="board" role="group" aria-label="Tic-tac-toe board" data-turn="x">
+          <button type="button" class="cell" data-index="0" data-state="empty" aria-label="Row 1, column 1">
+            <svg aria-hidden="true"><use href="#sym-x"></use></svg>
+          </button>
+          <button type="button" class="cell" data-index="1" data-state="empty" aria-label="Row 1, column 2">
+            <svg aria-hidden="true"><use href="#sym-x"></use></svg>
+          </button>
+          <button type="button" class="cell" data-index="2" data-state="empty" aria-label="Row 1, column 3">
+            <svg aria-hidden="true"><use href="#sym-x"></use></svg>
+          </button>
+          <button type="button" class="cell" data-index="3" data-state="empty" aria-label="Row 2, column 1">
+            <svg aria-hidden="true"><use href="#sym-x"></use></svg>
+          </button>
+          <button type="button" class="cell" data-index="4" data-state="empty" aria-label="Row 2, column 2">
+            <svg aria-hidden="true"><use href="#sym-x"></use></svg>
+          </button>
+          <button type="button" class="cell" data-index="5" data-state="empty" aria-label="Row 2, column 3">
+            <svg aria-hidden="true"><use href="#sym-x"></use></svg>
+          </button>
+          <button type="button" class="cell" data-index="6" data-state="empty" aria-label="Row 3, column 1">
+            <svg aria-hidden="true"><use href="#sym-x"></use></svg>
+          </button>
+          <button type="button" class="cell" data-index="7" data-state="empty" aria-label="Row 3, column 2">
+            <svg aria-hidden="true"><use href="#sym-x"></use></svg>
+          </button>
+          <button type="button" class="cell" data-index="8" data-state="empty" aria-label="Row 3, column 3">
+            <svg aria-hidden="true"><use href="#sym-x"></use></svg>
+          </button>
+          <div class="board__win-line" id="win-line" aria-hidden="true"></div>
+        </div>
+
+        <div class="board-actions">
+          <button type="button" class="button button--ghost" id="undo" disabled>Undo</button>
+          <button type="button" class="button button--primary" id="restart" hidden>Play again</button>
+        </div>
+
+        <div class="replay-bar" id="replay-bar" role="group" aria-label="Replay controls">
+          <button type="button" class="button button--ghost button--small" id="replay-back" disabled>Back</button>
+          <button type="button" class="button button--primary button--small" id="replay-toggle" aria-pressed="false">Play</button>
+          <button type="button" class="button button--ghost button--small" id="replay-forward" disabled>Next</button>
+          <button type="button" class="button button--ghost button--small" id="replay-exit">Exit replay</button>
+        </div>
+
+        <noscript>
+          <p class="notice">This game needs JavaScript to run.</p>
+        </noscript>
+      </section>
+
+      <section class="panel panel--stats" aria-labelledby="stats-title">
+        <h2 class="panel__title" id="stats-title">Statistics</h2>
+
+        <ul class="stats">
+          <li class="stats__row">
+            <span class="stats__label stats__label--x" id="x-label">
+              <svg aria-hidden="true"><use href="#sym-x"></use></svg>
+              <span class="stats__label-text" id="x-name">Player 1</span>
+            </span>
+            <span class="meter" aria-hidden="true">
+              <span class="meter__fill meter__fill--x" id="x-meter"></span>
+            </span>
+            <span class="stats__value" id="x-winrate">0%</span>
+          </li>
+          <li class="stats__row">
+            <span class="stats__label stats__label--o" id="o-label">
+              <svg aria-hidden="true"><use href="#sym-o"></use></svg>
+              <span class="stats__label-text" id="o-name">Player 2</span>
+            </span>
+            <span class="meter" aria-hidden="true">
+              <span class="meter__fill meter__fill--o" id="o-meter"></span>
+            </span>
+            <span class="stats__value" id="o-winrate">0%</span>
+          </li>
+        </ul>
+
+        <p class="stats__meta" id="stats-meta">No games yet.</p>
+
+        <h3 class="panel__subtitle" id="history-title">Last 10 games</h3>
+        <ol class="history" id="history" aria-labelledby="history-title">
+          <li data-empty>No games yet.</li>
+        </ol>
+      </section>
+      </div>
+
+      <aside class="sidebar" aria-label="Game settings">
+        <section class="panel" aria-labelledby="settings-title">
+          <h2 class="panel__title" id="settings-title">Settings</h2>
+
+          <form class="settings" id="settings">
+            <fieldset class="field">
+              <legend class="field__legend">First move</legend>
+              <div class="choices">
+                <label class="choice">
+                  <input class="choice__input" type="radio" name="first-player" value="random" checked>
+                  <span>Random</span>
+                </label>
+                <label class="choice">
+                  <input class="choice__input" type="radio" name="first-player" value="x">
+                  <span id="first-x-label">Player 1</span>
+                </label>
+                <label class="choice">
+                  <input class="choice__input" type="radio" name="first-player" value="o">
+                  <span id="first-o-label">Player 2</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset class="field">
+              <legend class="field__legend">Opponent</legend>
+              <div class="choices">
+                <label class="choice">
+                  <input class="choice__input" type="radio" name="opponent" value="human" checked>
+                  <span>Two players</span>
+                </label>
+                <label class="choice">
+                  <input class="choice__input" type="radio" name="opponent" value="bot">
+                  <span>Bot</span>
+                </label>
+              </div>
+
+              <div class="field__row">
+                <label class="field__label" for="difficulty">Bot difficulty</label>
+                <select class="select" id="difficulty" name="difficulty" disabled>
+                  <option value="lose">Tries to lose</option>
+                  <option value="easy">Easy</option>
+                  <option value="medium" selected>Medium</option>
+                  <option value="hard">Hard</option>
+                  <option value="impossible">Impossible</option>
+                </select>
+              </div>
+
+              <p class="hint">Match settings apply from the next game.</p>
+            </fieldset>
+
+            <fieldset class="field">
+              <legend class="field__legend">Theme</legend>
+              <div class="theme-switch">
+                <label class="theme-switch__item">
+                  <input type="radio" name="theme" value="auto" checked>
+                  <span>Auto</span>
+                </label>
+                <label class="theme-switch__item">
+                  <input type="radio" name="theme" value="light">
+                  <span>Light</span>
+                </label>
+                <label class="theme-switch__item">
+                  <input type="radio" name="theme" value="dark">
+                  <span>Dark</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset class="field">
+              <legend class="field__legend">Players' look</legend>
+
+              <div class="player-look player-look--x">
+                <div class="look__head">
+                  <label class="look__label" for="color-x" id="look-x-label">Player 1</label>
+                  <input class="color-input" type="color" id="color-x" name="color-x" value="#0e86b3">
+                </div>
+                <div class="symbol-grid" id="symbol-x-group" role="radiogroup" aria-label="Player 1 symbol">
+                  <label class="symbol-option" title="X">
+                    <input type="radio" name="symbol-x" value="x" checked>
+                    <svg aria-hidden="true"><use href="#sym-x"></use></svg>
+                    <span class="visually-hidden">X</span>
+                  </label>
+                  <label class="symbol-option" title="O">
+                    <input type="radio" name="symbol-x" value="o">
+                    <svg aria-hidden="true"><use href="#sym-o"></use></svg>
+                    <span class="visually-hidden">O</span>
+                  </label>
+                  <label class="symbol-option" title="Star">
+                    <input type="radio" name="symbol-x" value="star">
+                    <svg aria-hidden="true"><use href="#sym-star"></use></svg>
+                    <span class="visually-hidden">Star</span>
+                  </label>
+                  <label class="symbol-option" title="Heart">
+                    <input type="radio" name="symbol-x" value="heart">
+                    <svg aria-hidden="true"><use href="#sym-heart"></use></svg>
+                    <span class="visually-hidden">Heart</span>
+                  </label>
+                  <label class="symbol-option" title="Bolt">
+                    <input type="radio" name="symbol-x" value="bolt">
+                    <svg aria-hidden="true"><use href="#sym-bolt"></use></svg>
+                    <span class="visually-hidden">Bolt</span>
+                  </label>
+                  <label class="symbol-option" title="Diamond">
+                    <input type="radio" name="symbol-x" value="diamond">
+                    <svg aria-hidden="true"><use href="#sym-diamond"></use></svg>
+                    <span class="visually-hidden">Diamond</span>
+                  </label>
+                  <label class="symbol-option" title="Moon">
+                    <input type="radio" name="symbol-x" value="moon">
+                    <svg aria-hidden="true"><use href="#sym-moon"></use></svg>
+                    <span class="visually-hidden">Moon</span>
+                  </label>
+                  <label class="symbol-option" title="Triangle">
+                    <input type="radio" name="symbol-x" value="triangle">
+                    <svg aria-hidden="true"><use href="#sym-triangle"></use></svg>
+                    <span class="visually-hidden">Triangle</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="player-look player-look--o">
+                <div class="look__head">
+                  <label class="look__label" for="color-o" id="look-o-label">Player 2</label>
+                  <input class="color-input" type="color" id="color-o" name="color-o" value="#2e9460">
+                </div>
+                <div class="symbol-grid" id="symbol-o-group" role="radiogroup" aria-label="Player 2 symbol">
+                  <label class="symbol-option" title="X">
+                    <input type="radio" name="symbol-o" value="x">
+                    <svg aria-hidden="true"><use href="#sym-x"></use></svg>
+                    <span class="visually-hidden">X</span>
+                  </label>
+                  <label class="symbol-option" title="O">
+                    <input type="radio" name="symbol-o" value="o" checked>
+                    <svg aria-hidden="true"><use href="#sym-o"></use></svg>
+                    <span class="visually-hidden">O</span>
+                  </label>
+                  <label class="symbol-option" title="Star">
+                    <input type="radio" name="symbol-o" value="star">
+                    <svg aria-hidden="true"><use href="#sym-star"></use></svg>
+                    <span class="visually-hidden">Star</span>
+                  </label>
+                  <label class="symbol-option" title="Heart">
+                    <input type="radio" name="symbol-o" value="heart">
+                    <svg aria-hidden="true"><use href="#sym-heart"></use></svg>
+                    <span class="visually-hidden">Heart</span>
+                  </label>
+                  <label class="symbol-option" title="Bolt">
+                    <input type="radio" name="symbol-o" value="bolt">
+                    <svg aria-hidden="true"><use href="#sym-bolt"></use></svg>
+                    <span class="visually-hidden">Bolt</span>
+                  </label>
+                  <label class="symbol-option" title="Diamond">
+                    <input type="radio" name="symbol-o" value="diamond">
+                    <svg aria-hidden="true"><use href="#sym-diamond"></use></svg>
+                    <span class="visually-hidden">Diamond</span>
+                  </label>
+                  <label class="symbol-option" title="Moon">
+                    <input type="radio" name="symbol-o" value="moon">
+                    <svg aria-hidden="true"><use href="#sym-moon"></use></svg>
+                    <span class="visually-hidden">Moon</span>
+                  </label>
+                  <label class="symbol-option" title="Triangle">
+                    <input type="radio" name="symbol-o" value="triangle">
+                    <svg aria-hidden="true"><use href="#sym-triangle"></use></svg>
+                    <span class="visually-hidden">Triangle</span>
+                  </label>
+                </div>
+              </div>
+
+              <p class="hint">Theme, symbols and colours apply immediately. If both players pick the same symbol, they swap.</p>
+            </fieldset>
+
+            <p class="hint" id="storage-hint">Settings are saved in this browser.</p>
+          </form>
+        </section>
+
+      </aside>
+    </main>
+
+    <footer class="page-footer">
+      <p>A student project built with plain HTML, CSS and JavaScript.</p>
+    </footer>
+  </div>
+
+  <dialog class="confirm-dialog" id="reset-dialog" aria-labelledby="reset-title" aria-describedby="reset-message">
+    <h2 class="confirm-dialog__title" id="reset-title">Start replay?</h2>
+    <p class="confirm-dialog__text" id="reset-message">Starting a replay will reset the current game progress.</p>
+    <div class="confirm-dialog__actions">
+      <button type="button" class="button button--ghost" id="reset-cancel">Keep playing</button>
+      <button type="button" class="button button--primary" id="reset-confirm">Start replay</button>
+    </div>
+  </dialog>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

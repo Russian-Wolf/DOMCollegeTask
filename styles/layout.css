@@ -1,0 +1,170 @@
+/* ============================================================
+   Layout: page shell, panels, responsive + replay view
+   ============================================================ */
+
+.page {
+  width: min(calc(100% - 2rem), var(--page-max));
+  margin: 0 auto;
+  padding: 2.25rem 0 1.5rem;
+  display: grid;
+  gap: 1.75rem;
+}
+
+/* Derived player tones. JS only sets --p1 / --p2 on this element;
+   everything visual below is computed from them. */
+#app {
+  --p1-ink: color-mix(in srgb, var(--p1) 68%, var(--color-ink));
+  --p2-ink: color-mix(in srgb, var(--p2) 68%, var(--color-ink));
+  --p1-soft: color-mix(in srgb, var(--p1) 16%, var(--color-surface));
+  --p2-soft: color-mix(in srgb, var(--p2) 16%, var(--color-surface));
+}
+
+.page-header {
+  display: grid;
+  gap: 0.4rem;
+  text-align: center;
+}
+
+.page-title {
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-accent-strong);
+}
+
+.page-subtitle {
+  color: var(--color-muted);
+}
+
+.layout {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+
+.main-column {
+  flex: 1.1;
+  min-width: 0;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.panel--game,
+.panel--stats {
+  min-width: 0;
+}
+
+.sidebar {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.panel {
+  display: grid;
+  gap: 1rem;
+  padding: 1.35rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-panel);
+}
+
+.panel__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-accent-strong);
+}
+
+.panel__subtitle {
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.notice {
+  padding: 0.6rem 0.9rem;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-alt);
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.page-footer {
+  padding-top: 0.25rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+}
+
+/* ---------- Replay view ---------- */
+
+#app[data-view="replay"] .layout {
+  display: block;
+}
+
+#app[data-view="replay"] .main-column {
+  display: block;
+}
+
+#app[data-view="replay"] .sidebar,
+#app[data-view="replay"] .panel--stats {
+  display: none;
+}
+
+#app[data-view="replay"] .panel--game {
+  width: 100%;
+  max-width: 40rem;
+  margin-inline: auto;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 900px) {
+  .layout {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main-column {
+    display: contents;
+  }
+
+  .panel--game,
+  .panel--stats,
+  .sidebar {
+    width: 100%;
+    max-width: 40rem;
+  }
+
+  .panel--game {
+    order: 1;
+  }
+
+  .sidebar {
+    order: 2;
+    flex: none;
+  }
+
+  .panel--stats {
+    order: 3;
+  }
+}
+
+@media (max-width: 420px) {
+  .page {
+    width: min(calc(100% - 1.25rem), var(--page-max));
+    padding-top: 1.5rem;
+  }
+
+  .panel {
+    padding: 1rem;
+    border-radius: var(--radius-md);
+  }
+}

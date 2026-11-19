@@ -1,0 +1,92 @@
+/* ============================================================
+   Design tokens
+   Light is the default. Dark is applied either by the OS
+   preference or by <html data-theme="dark">. JS only writes
+   data-theme; it never writes colours into the stylesheet.
+   ============================================================ */
+
+:root {
+  color-scheme: light;
+
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --color-bg: #eaf6fb;
+  --color-bg-deep: #d9edf5;
+  --color-bg-glow: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f2f9fc;
+  --color-ink: #10242e;
+  --color-muted: #4f6673;
+  --color-border: #cfe4ee;
+  --color-border-strong: #a9cfdf;
+  --color-accent: #0e9ac1;
+  --color-accent-strong: #08718f;
+  --color-accent-deep: #065e78;
+  --color-accent-soft: #d9f1f8;
+  --color-on-accent: #ffffff;
+
+  /* Default player colours. JS may override these on #app. */
+  --p1: #0e86b3;
+  --p2: #2e9460;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --shadow-panel: 0 12px 32px rgba(16, 63, 84, 0.09);
+  --shadow-soft: 0 4px 12px rgba(16, 63, 84, 0.08);
+  --transition: 160ms ease;
+
+  --page-max: 1040px;
+  --board-max: 26rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --color-bg: #08101d;
+    --color-bg-deep: #050a14;
+    --color-bg-glow: rgba(56, 189, 248, 0.12);
+    --color-surface: #101a2b;
+    --color-surface-alt: #16223a;
+    --color-ink: #e8f4fb;
+    --color-muted: #9db3c6;
+    --color-border: #263a55;
+    --color-border-strong: #385577;
+    --color-accent: #38bdf8;
+    --color-accent-strong: #7dd3fc;
+    --color-accent-deep: #0ea5e9;
+    --color-accent-soft: #102b3f;
+    --color-on-accent: #06131f;
+    --shadow-panel: 0 16px 40px rgba(0, 0, 0, 0.5);
+    --shadow-soft: 0 4px 14px rgba(0, 0, 0, 0.4);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-bg: #08101d;
+  --color-bg-deep: #050a14;
+  --color-bg-glow: rgba(56, 189, 248, 0.12);
+  --color-surface: #101a2b;
+  --color-surface-alt: #16223a;
+  --color-ink: #e8f4fb;
+  --color-muted: #9db3c6;
+  --color-border: #263a55;
+  --color-border-strong: #385577;
+  --color-accent: #38bdf8;
+  --color-accent-strong: #7dd3fc;
+  --color-accent-deep: #0ea5e9;
+  --color-accent-soft: #102b3f;
+  --color-on-accent: #06131f;
+  --shadow-panel: 0 16px 40px rgba(0, 0, 0, 0.5);
+  --shadow-soft: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+@media (min-width: 1600px) {
+  :root {
+    --page-max: 1180px;
+    --board-max: 30rem;
+  }
+}
