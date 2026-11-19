@@ -773,6 +773,16 @@
   color: var(--color-muted);
 }
 
+/* Entries without stored moves are visible but not replayable. */
+#history > li > button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+#history > li > button:disabled:hover {
+  background: var(--color-surface-alt);
+}
+
 /* ---------- Confirmation dialog ---------- */
 
 .confirm-dialog {
@@ -823,5 +833,16 @@
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+/* Compact desktop controls get comfortable touch targets on touch devices. */
+@media (pointer: coarse) {
+  .choice,
+  .theme-switch__item,
+  .button--small,
+  .color-input,
+  #history > li > button {
+    min-height: 44px;
   }
 }

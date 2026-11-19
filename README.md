@@ -4,9 +4,9 @@
 
 A frontend-only tic-tac-toe game with custom vector symbols, per-player colours, light/dark themes, a bot ladder, undo, statistics, and replay.
 
-> **Status:** the static HTML/CSS shell, the empty module skeleton, and the behaviour spec are in place; the JavaScript implementation is in progress. Deployment target: GitHub Pages.
+> **Status:** the static HTML/CSS shell and the empty module skeleton are in place; the JavaScript implementation is next. Deployment target: GitHub Pages.
 
-## AI Usage disclousre.
+## AI usage disclosure
 - **AI Agent was used to assist with writing fully or partially:**
   - *HTML / CSS* - styles/static markup.
   - Documentation (such as this README.md).
@@ -42,7 +42,7 @@ Symbols are display only; the statistics rows show both the role text and the cu
 
 ### Personalisation
 
-- Eight vector symbols: X, O, star, heart, bolt, diamond, moon, triangle. Each player picks one; the second player cannot use the first player's symbol (they swap).
+- Eight vector symbols: X, O, star, heart, bolt, diamond, moon, triangle. Each player picks one; if both pick the same symbol, the two symbols swap so they stay distinct.
 - Per-player colour with a native colour picker; the turn/win status pill, win line, statistics, and history follow.
 - Light / dark / auto theme; saved.
 - Appearance (theme, symbols, colours) applies live; match settings apply from the next game.
@@ -52,7 +52,7 @@ Symbols are display only; the statistics rows show both the role text and the cu
 - Two players on one device (PvP).
 - Bot modes: tries to lose, easy, medium, hard, impossible.
 - The human is Player, the bot is Bot (internally slots `x` / `o`); the first-move setting can make the bot start.
-- “Impossible” cannot be beaten, only drawn; “tries to lose” is the demo mode where a competent human always wins.
+- “Impossible” cannot be beaten, only drawn; “Tries to lose” is the demo mode that a perfect human can beat.
 
 ### Statistics, history, replay
 
@@ -60,7 +60,7 @@ Symbols are display only; the statistics rows show both the role text and the cu
 - Win rate per role (Player 1 / Player 2 in PvP, Player / Bot against the bot).
 - Step-through replay with back / play-pause / next / exit.
 - Starting a replay mid-game warns that it resets the current game progress; there is no save/restore of a live game.
-- Everything persists in `localStorage` under `domcollege.ttt.v1`; no backend.
+- Settings, statistics, and history persist in `localStorage` under `domcollege.ttt.v1`; the live game is not saved. No backend.
 
 ## Post-v1 (later)
 
