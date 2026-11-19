@@ -3,3 +3,6 @@ notes/
 AGENTS.md
 eslint.config.mjs
 jsconfig.json
+
+# Local-only test suite (dev-time; not part of the deployed page)
+test/
