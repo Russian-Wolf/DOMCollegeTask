@@ -63,7 +63,7 @@
 
         <p class="status" id="status" role="status" aria-live="polite">Ready to play</p>
 
-        <div class="board" id="board" role="group" aria-label="Tic-tac-toe board" data-turn="x">
+        <div class="board" id="board" role="group" aria-label="Tic-tac-toe board" data-turn="p1">
           <button type="button" class="cell" data-index="0" data-state="empty" aria-label="Row 1, column 1">
             <svg aria-hidden="true"><use href="#sym-x"></use></svg>
           </button>
@@ -116,24 +116,24 @@
 
         <ul class="stats">
           <li class="stats__row">
-            <span class="stats__label stats__label--x" id="x-label">
+            <span class="stats__label stats__label--p1" id="p1-label">
               <svg aria-hidden="true"><use href="#sym-x"></use></svg>
-              <span class="stats__label-text" id="x-name">Player 1</span>
+              <span class="stats__label-text" id="p1-name">Player 1</span>
             </span>
             <span class="meter" aria-hidden="true">
-              <span class="meter__fill meter__fill--x" id="x-meter"></span>
+              <span class="meter__fill meter__fill--p1" id="p1-meter"></span>
             </span>
-            <span class="stats__value" id="x-winrate">0%</span>
+            <span class="stats__value" id="p1-winrate">0%</span>
           </li>
           <li class="stats__row">
-            <span class="stats__label stats__label--o" id="o-label">
+            <span class="stats__label stats__label--p2" id="p2-label">
               <svg aria-hidden="true"><use href="#sym-o"></use></svg>
-              <span class="stats__label-text" id="o-name">Player 2</span>
+              <span class="stats__label-text" id="p2-name">Player 2</span>
             </span>
             <span class="meter" aria-hidden="true">
-              <span class="meter__fill meter__fill--o" id="o-meter"></span>
+              <span class="meter__fill meter__fill--p2" id="p2-meter"></span>
             </span>
-            <span class="stats__value" id="o-winrate">0%</span>
+            <span class="stats__value" id="p2-winrate">0%</span>
           </li>
         </ul>
 
@@ -159,12 +159,12 @@
                   <span>Random</span>
                 </label>
                 <label class="choice">
-                  <input class="choice__input" type="radio" name="first-player" value="x">
-                  <span id="first-x-label">Player 1</span>
+                  <input class="choice__input" type="radio" name="first-player" value="p1">
+                  <span id="first-p1-label">Player 1</span>
                 </label>
                 <label class="choice">
-                  <input class="choice__input" type="radio" name="first-player" value="o">
-                  <span id="first-o-label">Player 2</span>
+                  <input class="choice__input" type="radio" name="first-player" value="p2">
+                  <span id="first-p2-label">Player 2</span>
                 </label>
               </div>
             </fieldset>
@@ -217,98 +217,98 @@
             <fieldset class="field">
               <legend class="field__legend">Players' look</legend>
 
-              <div class="player-look player-look--x">
+              <div class="player-look player-look--p1">
                 <div class="look__head">
-                  <label class="look__label" for="color-x" id="look-x-label">Player 1</label>
-                  <input class="color-input" type="color" id="color-x" name="color-x" value="#0e86b3">
+                  <label class="look__label" for="color-p1" id="look-p1-label">Player 1</label>
+                  <input class="color-input" type="color" id="color-p1" name="color-p1" value="#0e86b3">
                 </div>
-                <div class="symbol-grid" id="symbol-x-group" role="radiogroup" aria-label="Player 1 symbol">
+                <div class="symbol-grid" id="symbol-p1-group" role="radiogroup" aria-label="Player 1 symbol">
                   <label class="symbol-option" title="X">
-                    <input type="radio" name="symbol-x" value="x" checked>
+                    <input type="radio" name="symbol-p1" value="x" checked>
                     <svg aria-hidden="true"><use href="#sym-x"></use></svg>
                     <span class="visually-hidden">X</span>
                   </label>
                   <label class="symbol-option" title="O">
-                    <input type="radio" name="symbol-x" value="o">
+                    <input type="radio" name="symbol-p1" value="o">
                     <svg aria-hidden="true"><use href="#sym-o"></use></svg>
                     <span class="visually-hidden">O</span>
                   </label>
                   <label class="symbol-option" title="Star">
-                    <input type="radio" name="symbol-x" value="star">
+                    <input type="radio" name="symbol-p1" value="star">
                     <svg aria-hidden="true"><use href="#sym-star"></use></svg>
                     <span class="visually-hidden">Star</span>
                   </label>
                   <label class="symbol-option" title="Heart">
-                    <input type="radio" name="symbol-x" value="heart">
+                    <input type="radio" name="symbol-p1" value="heart">
                     <svg aria-hidden="true"><use href="#sym-heart"></use></svg>
                     <span class="visually-hidden">Heart</span>
                   </label>
                   <label class="symbol-option" title="Bolt">
-                    <input type="radio" name="symbol-x" value="bolt">
+                    <input type="radio" name="symbol-p1" value="bolt">
                     <svg aria-hidden="true"><use href="#sym-bolt"></use></svg>
                     <span class="visually-hidden">Bolt</span>
                   </label>
                   <label class="symbol-option" title="Diamond">
-                    <input type="radio" name="symbol-x" value="diamond">
+                    <input type="radio" name="symbol-p1" value="diamond">
                     <svg aria-hidden="true"><use href="#sym-diamond"></use></svg>
                     <span class="visually-hidden">Diamond</span>
                   </label>
                   <label class="symbol-option" title="Moon">
-                    <input type="radio" name="symbol-x" value="moon">
+                    <input type="radio" name="symbol-p1" value="moon">
                     <svg aria-hidden="true"><use href="#sym-moon"></use></svg>
                     <span class="visually-hidden">Moon</span>
                   </label>
                   <label class="symbol-option" title="Triangle">
-                    <input type="radio" name="symbol-x" value="triangle">
+                    <input type="radio" name="symbol-p1" value="triangle">
                     <svg aria-hidden="true"><use href="#sym-triangle"></use></svg>
                     <span class="visually-hidden">Triangle</span>
                   </label>
                 </div>
               </div>
 
-              <div class="player-look player-look--o">
+              <div class="player-look player-look--p2">
                 <div class="look__head">
-                  <label class="look__label" for="color-o" id="look-o-label">Player 2</label>
-                  <input class="color-input" type="color" id="color-o" name="color-o" value="#2e9460">
+                  <label class="look__label" for="color-p2" id="look-p2-label">Player 2</label>
+                  <input class="color-input" type="color" id="color-p2" name="color-p2" value="#2e9460">
                 </div>
-                <div class="symbol-grid" id="symbol-o-group" role="radiogroup" aria-label="Player 2 symbol">
+                <div class="symbol-grid" id="symbol-p2-group" role="radiogroup" aria-label="Player 2 symbol">
                   <label class="symbol-option" title="X">
-                    <input type="radio" name="symbol-o" value="x">
+                    <input type="radio" name="symbol-p2" value="x">
                     <svg aria-hidden="true"><use href="#sym-x"></use></svg>
                     <span class="visually-hidden">X</span>
                   </label>
                   <label class="symbol-option" title="O">
-                    <input type="radio" name="symbol-o" value="o" checked>
+                    <input type="radio" name="symbol-p2" value="o" checked>
                     <svg aria-hidden="true"><use href="#sym-o"></use></svg>
                     <span class="visually-hidden">O</span>
                   </label>
                   <label class="symbol-option" title="Star">
-                    <input type="radio" name="symbol-o" value="star">
+                    <input type="radio" name="symbol-p2" value="star">
                     <svg aria-hidden="true"><use href="#sym-star"></use></svg>
                     <span class="visually-hidden">Star</span>
                   </label>
                   <label class="symbol-option" title="Heart">
-                    <input type="radio" name="symbol-o" value="heart">
+                    <input type="radio" name="symbol-p2" value="heart">
                     <svg aria-hidden="true"><use href="#sym-heart"></use></svg>
                     <span class="visually-hidden">Heart</span>
                   </label>
                   <label class="symbol-option" title="Bolt">
-                    <input type="radio" name="symbol-o" value="bolt">
+                    <input type="radio" name="symbol-p2" value="bolt">
                     <svg aria-hidden="true"><use href="#sym-bolt"></use></svg>
                     <span class="visually-hidden">Bolt</span>
                   </label>
                   <label class="symbol-option" title="Diamond">
-                    <input type="radio" name="symbol-o" value="diamond">
+                    <input type="radio" name="symbol-p2" value="diamond">
                     <svg aria-hidden="true"><use href="#sym-diamond"></use></svg>
                     <span class="visually-hidden">Diamond</span>
                   </label>
                   <label class="symbol-option" title="Moon">
-                    <input type="radio" name="symbol-o" value="moon">
+                    <input type="radio" name="symbol-p2" value="moon">
                     <svg aria-hidden="true"><use href="#sym-moon"></use></svg>
                     <span class="visually-hidden">Moon</span>
                   </label>
                   <label class="symbol-option" title="Triangle">
-                    <input type="radio" name="symbol-o" value="triangle">
+                    <input type="radio" name="symbol-p2" value="triangle">
                     <svg aria-hidden="true"><use href="#sym-triangle"></use></svg>
                     <span class="visually-hidden">Triangle</span>
                   </label>

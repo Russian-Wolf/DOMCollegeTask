@@ -19,12 +19,12 @@
     color var(--transition);
 }
 
-.status[data-tone="x"] {
+.status[data-tone="p1"] {
   background: var(--p1-soft);
   color: var(--p1-ink);
 }
 
-.status[data-tone="o"] {
+.status[data-tone="p2"] {
   background: var(--p2-soft);
   color: var(--p2-ink);
 }
@@ -49,12 +49,12 @@
   pointer-events: none;
 }
 
-.board[data-winner="x"] {
+.board[data-winner="p1"] {
   --win-color: var(--p1);
   --win-soft: var(--p1-soft);
 }
 
-.board[data-winner="o"] {
+.board[data-winner="p2"] {
   --win-color: var(--p2);
   --win-soft: var(--p2-soft);
 }
@@ -88,11 +88,11 @@
   cursor: default;
 }
 
-.cell[data-state="x"] {
+.cell[data-state="p1"] {
   color: var(--p1);
 }
 
-.cell[data-state="o"] {
+.cell[data-state="p2"] {
   color: var(--p2);
 }
 
@@ -107,18 +107,18 @@
   transition: opacity var(--transition);
 }
 
-.cell[data-state="x"] > svg,
-.cell[data-state="o"] > svg {
+.cell[data-state="p1"] > svg,
+.cell[data-state="p2"] > svg {
   animation: symbol-pop 180ms ease-out;
 }
 
 /* The preview is always the current player's symbol; the board
    carries the turn so CSS can colour it without touching cells. */
-.board[data-turn="x"] .cell[data-state="empty"] > svg {
+.board[data-turn="p1"] .cell[data-state="empty"] > svg {
   color: var(--p1);
 }
 
-.board[data-turn="o"] .cell[data-state="empty"] > svg {
+.board[data-turn="p2"] .cell[data-state="empty"] > svg {
   color: var(--p2);
 }
 
@@ -155,8 +155,8 @@
   opacity: 1;
 }
 
-.board[data-finished] .cell[data-state="x"]:not([data-win]),
-.board[data-finished] .cell[data-state="o"]:not([data-win]) {
+.board[data-finished] .cell[data-state="p1"]:not([data-win]),
+.board[data-finished] .cell[data-state="p2"]:not([data-win]) {
   color: var(--color-muted);
 }
 
@@ -489,11 +489,11 @@
   gap: 0.5rem;
 }
 
-.player-look--x {
+.player-look--p1 {
   --player: var(--p1);
 }
 
-.player-look--o {
+.player-look--p2 {
   --player: var(--p2);
 }
 
@@ -620,12 +620,12 @@
   color: var(--color-ink);
 }
 
-.stats__label--x {
+.stats__label--p1 {
   --label-color: var(--p1);
   --label-ink: var(--p1-ink);
 }
 
-.stats__label--o {
+.stats__label--p2 {
   --label-color: var(--p2);
   --label-ink: var(--p2-ink);
 }
@@ -666,7 +666,7 @@
   transition: width 320ms ease;
 }
 
-.meter__fill--x {
+.meter__fill--p1 {
   background: linear-gradient(
     90deg,
     var(--p1),
@@ -674,7 +674,7 @@
   );
 }
 
-.meter__fill--o {
+.meter__fill--p2 {
   background: linear-gradient(
     90deg,
     var(--p2),
@@ -723,11 +723,11 @@
   background: var(--color-accent-soft);
 }
 
-#history > li > button[data-result="x"] {
+#history > li > button[data-result="p1"] {
   border-left-color: var(--p1);
 }
 
-#history > li > button[data-result="o"] {
+#history > li > button[data-result="p2"] {
   border-left-color: var(--p2);
 }
 
@@ -758,11 +758,11 @@
   color: var(--color-muted);
 }
 
-#history > li > button[data-result="x"] svg {
+#history > li > button[data-result="p1"] svg {
   color: var(--p1);
 }
 
-#history > li > button[data-result="o"] svg {
+#history > li > button[data-result="p2"] svg {
   color: var(--p2);
 }
 
