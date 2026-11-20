@@ -4,7 +4,7 @@
 
 A frontend-only tic-tac-toe game with custom vector symbols, per-player colours, light/dark themes, a bot ladder, undo, statistics, and replay.
 
-> **Status:** the static HTML/CSS shell and the empty module skeleton are in place; the JavaScript implementation is next. Deployment target: GitHub Pages.
+> **Status:** the static HTML/CSS shell and the JS module skeleton are in place; the JavaScript implementation is in progress. Deployment target: GitHub Pages.
 
 ## AI usage disclosure
 - **AI Agent was used to assist with writing fully or partially:**
