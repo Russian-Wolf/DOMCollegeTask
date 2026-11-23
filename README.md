@@ -24,6 +24,10 @@ A frontend-only tic-tac-toe game with custom vector symbols, per-player colours,
 - No backend, no login, no real multiplayer.
 - Everything happens on one page; replay is a view of the same page.
 
+### Instructions and info window
+- Displayed when first launched.
+- Also available by using a dedicated button.
+
 ### Game
 
 - 3×3 board, empty at start.
