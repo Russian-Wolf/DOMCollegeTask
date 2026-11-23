@@ -4,6 +4,8 @@
 
 A frontend-only tic-tac-toe game with custom vector symbols, per-player colours, light/dark themes, a bot ladder, undo, statistics, and replay.
 
+**Deployment page:** [Tic Tac Toe](https://russian-wolf.github.io/DOMCollegeTask/)
+
 > **Status:** the static HTML/CSS shell and the JS module skeleton are in place; the JavaScript implementation is in progress. Deployment target: GitHub Pages.
 
 ## AI usage disclosure
