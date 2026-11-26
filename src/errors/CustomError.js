@@ -1,39 +1,4 @@
-import { safeDispatch } from '../helpers/useful.js'
-
-function wrongType({ field, expected, valueType }) {
-  const msg = `Wrong type for ${field}`
-    + `\nExpected: ${expected}`
-    + `\nActual: ${valueType}`
-  return msg
-}
-
-function missingField({ field, expected }) {
-  const msg = `Missing ${field}`
-    + `\nExpected: ${expected}`
-  return msg
-}
-
-function invalidValue({ field, expected, value }) {
-  const msg = `Invalid ${field}`
-    + `\nExpected: ${expected}`
-    + `\nActual: ${value}`
-  return msg
-}
-
-function invalidHandleMode({ expected, value }) {
-  const msg = `Invalid handle mode`
-    + `\nExpected: ${expected}`
-    + `\nActual: ${value}`
-  return msg
-}
-
-const MESSAGE_TEMPLATES = {
-  'unknown': function unknown() { return `Unknown error type.` },
-  'wrong-type': wrongType,
-  'missing-field': missingField,
-  'invalid-value': invalidValue,
-  'invalid-handle-mode': invalidHandleMode,
-}
+import { safeStringify } from '../helpers/stringify.js'
 
 export class CustomError extends Error {
   static type = 'custom'
@@ -45,23 +10,81 @@ export class CustomError extends Error {
     expected: 'unknown',
   }
 
-  static messageTemplates = MESSAGE_TEMPLATES
+  static formatAssertion(options) {
+    const lines = [options.head]
+    if (Object.hasOwn(options, 'expected')) lines.push(`Expected: ${options.expected}`)
+    if (Object.hasOwn(options, 'actual')) lines.push(`Actual: ${options.actual}`)
+    return lines.join('\n')
+  }
+
+  static templateWrongType({ field, expected, valueType }) {
+    return this.formatAssertion({
+      head: `Wrong type for ${this.stringify(field)}`,
+      expected: this.stringify(expected),
+      actual: valueType,
+    })
+  }
+
+  static templateMissingField({ field, expected }) {
+    return this.formatAssertion({
+      head: `Missing ${this.stringify(field)}`,
+      expected: this.stringify(expected),
+    })
+  }
+
+  static templateInvalidValue({ field, expected, value }) {
+    return this.formatAssertion({
+      head: `Invalid ${this.stringify(field)}`,
+      expected: this.stringify(expected),
+      actual: this.stringify(value),
+    })
+  }
+
+  static templateInvalidNoActual({ field, expected }) {
+    return this.formatAssertion({
+      head: `Invalid ${this.stringify(field)}`,
+      expected: this.stringify(expected),
+    })
+  }
+
+  static templateInvalidHandleMode({ expected, value }) {
+    return this.formatAssertion({
+      head: `Invalid handle mode`,
+      expected: this.stringify(expected),
+      actual: this.stringify(value),
+    })
+  }
+
+  static templateUnknown() {
+    return `Unknown error type.`
+  }
+
+  /** @type {Map<string, string>} */
+  static messageTemplates = new Map([
+    ['unknown', 'templateUnknown'],
+    ['wrong-type', 'templateWrongType'],
+    ['missing-field', 'templateMissingField'],
+    ['invalid-value', 'templateInvalidValue'],
+    ['invalid-handle-mode', 'templateInvalidHandleMode'],
+  ])
 
   static buildMessage(data) {
     const errMsg = `${this.name} internal message generation error.`
       + `\n Message templates likely malformed.`
+    const methodMap = this.messageTemplates
+    if (!(methodMap instanceof Map)) throw new Error(errMsg)
 
-    if (!this.messageTemplates || typeof this.messageTemplates !== 'object') throw new Error(errMsg)
+    const key = methodMap.has(data.reason) ? data.reason : 'unknown'
+    const methodName = methodMap.get(key)
 
-    let template
-    try {
-      template = safeDispatch(data.reason, this.messageTemplates)
-    }
-    catch {
-      template = this.messageTemplates.unknown
-    }
-    if (typeof template !== 'function') throw new Error(errMsg)
-    return template.call(this, data)
+    if (typeof methodName !== 'string'
+      || !methodName.startsWith('template')
+      || typeof this[methodName] !== 'function') throw new Error(errMsg)
+    return this[methodName](data)
+  }
+
+  static stringify(value) {
+    return safeStringify(value, { includeStack: false })
   }
 
   constructor(rawData = {}, errorOptions = undefined, messageOverride = undefined) {
@@ -74,6 +97,7 @@ export class CustomError extends Error {
 
     this.name = newClass.name
     this.type = newClass.type
+    this.rawData = rawData
 
     for (const key of Object.keys(newClass.defaults)) {
       this[key] = data[key]
