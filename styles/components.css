@@ -825,6 +825,25 @@
   margin-top: 1.25rem;
 }
 
+.info-dialog {
+  width: min(calc(100% - 2rem), 34rem);
+}
+
+.info-dialog__body {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 0.75rem;
+  color: var(--color-muted);
+}
+
+.info-dialog__body p {
+  margin: 0;
+}
+
+.info-dialog__body strong {
+  color: var(--color-ink);
+}
+
 @keyframes dialog-pop {
   from {
     opacity: 0;

@@ -326,7 +326,11 @@
     </main>
 
     <footer class="page-footer">
-      <p>A student project built with plain HTML, CSS and JavaScript.</p>
+      <p class="page-footer__credit">
+        Built by <a href="https://github.com/Russian-Wolf" target="_blank" rel="noreferrer">Russian_Wolf</a>
+      </p>
+      <button type="button" class="button button--ghost button--small" id="info-open"
+        aria-haspopup="dialog" aria-controls="info-dialog">Rules &amp; info</button>
     </footer>
   </div>
 
@@ -336,6 +340,19 @@
     <div class="confirm-dialog__actions">
       <button type="button" class="button button--ghost" id="reset-cancel">Keep playing</button>
       <button type="button" class="button button--primary" id="reset-confirm">Start replay</button>
+    </div>
+  </dialog>
+
+  <dialog class="confirm-dialog info-dialog" id="info-dialog" aria-labelledby="info-title">
+    <h2 class="confirm-dialog__title" id="info-title">How to play</h2>
+    <div class="info-dialog__body">
+      <p>Get three of your symbols in a row — horizontal, vertical or diagonal — to win. A full board with no line is a tie.</p>
+      <p>Players take turns picking an empty square. In <strong>Two players</strong>, both players share this device. Against the <strong>Bot</strong>, you are Player and the bot replies after a short delay.</p>
+      <p>Use <strong>Settings</strong> to change the first move, opponent and bot difficulty. Theme, symbols and colours apply immediately; match settings apply from the next game.</p>
+      <p><strong>About:</strong> a student project built with plain HTML, CSS and JavaScript. No backend; settings, statistics and history stay in this browser.</p>
+    </div>
+    <div class="confirm-dialog__actions">
+      <button type="button" class="button button--primary" id="info-close">Got it</button>
     </div>
   </dialog>
 

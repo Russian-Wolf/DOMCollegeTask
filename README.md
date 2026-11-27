@@ -25,8 +25,9 @@ A frontend-only tic-tac-toe game with custom vector symbols, per-player colours,
 - Everything happens on one page; replay is a view of the same page.
 
 ### Instructions and info window
-- Displayed when first launched.
+- Displayed on page load before the first game.
 - Also available by using a dedicated button.
+- The footer shows **Built by Russian_Wolf** and a **Rules & info** button that reopens the window.
 
 ### Game
 
