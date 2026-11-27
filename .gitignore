@@ -7,3 +7,6 @@ tsconfig.json
 
 # Local-only test suite (dev-time; not part of the deployed page)
 test/
+
+# Local-only scratch material (reference copies, experiments)
+temp/
